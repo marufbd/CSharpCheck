@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpCheck", "CSharpCheck\CSharpCheck.csproj", "{F06CE0C5-571C-41AB-A0CF-00F293FDFBA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{8D0FBF15-E6FC-449D-A211-9AB47D0BD762}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A2DD10CC-C245-4F4E-B12B-DDD3F79209BA}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F06CE0C5-571C-41AB-A0CF-00F293FDFBA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F06CE0C5-571C-41AB-A0CF-00F293FDFBA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F06CE0C5-571C-41AB-A0CF-00F293FDFBA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F06CE0C5-571C-41AB-A0CF-00F293FDFBA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D0FBF15-E6FC-449D-A211-9AB47D0BD762}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D0FBF15-E6FC-449D-A211-9AB47D0BD762}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D0FBF15-E6FC-449D-A211-9AB47D0BD762}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D0FBF15-E6FC-449D-A211-9AB47D0BD762}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
