@@ -1,10 +1,19 @@
-﻿using System;
+﻿#region Copyright
+
+// CSharpCheck
+// Copyright (c) 2013, Maruf Rahman. All rights reserved.                	
+// 
+// Licensed under the Apache License, Version 2.0 (the "License"); 	
+// There is NO WARRANTY. See the file LICENSE for the full text.
+
+#endregion
+
 using System.Collections.Generic;
 using System.Linq;
 
 namespace CSharpCheck.Generators
 {
-    class StringGenerator:Generator<string>
+    internal class StringGenerator : Generator<string>
     {
         public override IEnumerator<string> GetEnumerator()
         {

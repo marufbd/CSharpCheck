@@ -1,19 +1,34 @@
-﻿using System;
+﻿#region Copyright
+
+// CSharpCheck
+// Copyright (c) 2013, Maruf Rahman. All rights reserved.                	
+// 
+// Licensed under the Apache License, Version 2.0 (the "License"); 	
+// There is NO WARRANTY. See the file LICENSE for the full text.
+
+#endregion
+
+using System;
 using System.Collections.Generic;
 
 namespace CSharpCheck.Generators
 {
-    class IntGenerator : Generator<int>
+    internal class IntGenerator : Generator<int>
     {
-        private readonly int? _min, _max;
+        private readonly int? _max;
+        private readonly int? _min;
+
         public IntGenerator(int min, int max)
         {
-            if(min>max)
+            if (min > max)
                 throw new ArgumentOutOfRangeException("min cannot be greater than max");
             _max = max;
             _min = min;
         }
-        public IntGenerator(){}
+
+        public IntGenerator()
+        {
+        }
 
 
         public override IEnumerator<int> GetEnumerator()
@@ -21,7 +36,7 @@ namespace CSharpCheck.Generators
             var cnt = _size;
             bool givenZero = false, givenOne = false;
             int checkZero = _rnd.Next(1, 5), checkOne = _rnd.Next(1, 7);
-            for (int i = 0; i <cnt ; i++)
+            for (int i = 0; i < cnt; i++)
             {
                 if (_min.HasValue && _max.HasValue)
                 {
@@ -30,8 +45,8 @@ namespace CSharpCheck.Generators
                 else
                 {
                     var negative = _rnd.Next(0, 2) == 0;
-                    var returnZero = i == _rnd.Next(cnt-checkOne);
-                    var returnOne = i == _rnd.Next(cnt-checkZero);
+                    var returnZero = i == _rnd.Next(cnt - checkOne);
+                    var returnOne = i == _rnd.Next(cnt - checkZero);
                     if (returnZero)
                     {
                         givenZero = true;
@@ -47,9 +62,9 @@ namespace CSharpCheck.Generators
                         yield return 0;
                     if (i == (cnt - checkOne) && !givenOne)
                         yield return negative ? -1 : 1;
-                        
+
                     yield return negative ? -_rnd.Next() : _rnd.Next();
-                }                    
+                }
             }
         }
     }

@@ -1,26 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿#region Copyright
+
+// CSharpCheck
+// Copyright (c) 2013, Maruf Rahman. All rights reserved.                	
+// 
+// Licensed under the Apache License, Version 2.0 (the "License"); 	
+// There is NO WARRANTY. See the file LICENSE for the full text.
+
+#endregion
 
 namespace CSharpCheck.Specification
 {
     public static class Extensions
     {
-        public static ISpecification<T> And<T>(this ISpecification<T> spec1, ISpecification<T> spec2)
+        public static IPropertySpec And(this IPropertySpec thisSpec, IPropertySpec otherSpec)
         {
-            return new AndSpecification<T>(spec1, spec2);
+            return new AndPropertySpec(thisSpec, otherSpec);
         }
 
-        public static ISpecification<T> Or<T>(this ISpecification<T> spec1, ISpecification<T> spec2)
+
+        public static IPropertySpec Or(this IPropertySpec thisSpec, IPropertySpec otherSpec)
         {
-            return new OrSpecification<T>(spec1, spec2);
+            return new OrPropertySpec(thisSpec, otherSpec);
         }
 
-        public static ISpecification<T> Not<T>(this ISpecification<T> spec)
+        public static IPropertySpec Not(this IPropertySpec thisSpec)
         {
-            return new NotSpecification<T>(spec);
+            return new NotPropertySpec(thisSpec);
         } 
     }
 }

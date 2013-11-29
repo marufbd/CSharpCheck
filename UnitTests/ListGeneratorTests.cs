@@ -12,8 +12,8 @@ namespace UnitTests
         [TestMethod]
         public void ListOfInt()
         {
-            var prop = Prop.ForAll((List<int> s) => s.Count>=0);
-            
+            var prop = Prop.ForAll((List<int> s) => s.Count >= 0);
+
             prop.Check();
             Console.WriteLine(prop);
         }
@@ -22,14 +22,13 @@ namespace UnitTests
         [TestMethod]
         public void ArbitraryMultipleList()
         {
-            var prop=Prop.ForAll((List<int> x, List<int> y) => x.Concat(y).Count()==x.Count+y.Count);
+            var prop = Prop.ForAll((List<int> x, List<int> y) => x.Concat(y).Count() == x.Count + y.Count);
             prop.Check();
             Console.WriteLine(prop);
 
-            int a = 'a', z='z', A='A', Z='Z';
+            int a = 'a', z = 'z', A = 'A', Z = 'Z';
             Console.WriteLine(a);
             Console.WriteLine(z);
-
-        }        
+        }
     }
 }

@@ -1,25 +1,35 @@
-﻿using System;
+﻿#region Copyright
+
+// CSharpCheck
+// Copyright (c) 2013, Maruf Rahman. All rights reserved.                	
+// 
+// Licensed under the Apache License, Version 2.0 (the "License"); 	
+// There is NO WARRANTY. See the file LICENSE for the full text.
+
+#endregion
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using CSharpCheck.Specification;
 
 namespace CSharpCheck
 {
-    public class PropertySpec
+    class Property : PropertySpec
     {
         private readonly IPropArg _propArg;
-        private string _report = "Not yet checked, to see result call 'Check' method";
-
-        internal PropertySpec(IPropArg propArg)
+        
+        internal Property(IPropArg propArg)
         {
             _propArg = propArg;
         }
 
-        public void Check()
+        public override void Check()
         {
             var type = _propArg.GetType();
             var paramCount = type.GetGenericArguments().Count();
 
-            int cnt = 0;
+            var testCount = 0;
             bool passed = false;
             foreach (var v in _propArg.GetValues())
             {
@@ -34,65 +44,64 @@ namespace CSharpCheck
                     default:
                         throw new TestFailedException("Not supported these many params");
                 }
-                if (!passed && _propArg.Quntifier==Quantifier.ForAll)
+                if (!passed && _propArg.Quntifier == Quantifier.ForAll)
                 {
-                    _report = String.Format("! Failed after {0} tests, for value: {1}", cnt, v);
-                    throw new TestFailedException(_report);
+                    //Reporter.Report(String.Format("! Failed after {0} tests, for value: {1}", cnt, v));
+                    throw new TestFailedException(String.Format("! Failed after {0} tests, for value: {1}", testCount, v));
                 }
                 if (passed && _propArg.Quntifier == Quantifier.ThereExists)
                 {
-                    break;                    
+                    break;
                 }
-                
-                cnt++;
+
+                testCount++;
             }
             if (!passed && _propArg.Quntifier == Quantifier.ThereExists)
             {
-                _report = String.Format("! Failed after trying with {0} values, there exists no such value", cnt);
-                throw new TestFailedException(_report);
+                throw new TestFailedException(String.Format("! Failed after trying with {0} values, there exists no such value", testCount));
             }
 
-            _report = String.Format("OK, passed {0} tests.", cnt);
-        }
-
-        public override string ToString()
-        {
-            return _report;
-        }
+            Reporter.Report(String.Format("+ OK, passed after {0} tests.", testCount));
+        }        
     }
 
-    interface IPropArg
+    internal interface IPropArg
     {
-        IEnumerable<dynamic> GetValues();
         dynamic Prop { get; }
-        void SetPredicate(dynamic predicate);
 
         Quantifier Quntifier { get; set; }
+        IEnumerable<dynamic> GetValues();
+        void SetPredicate(dynamic predicate);
     }
 
-    class PropArg<T, T1>:IPropArg
+    internal class PropArg<T, T1> : IPropArg
     {
         public IEnumerable<T> Gen1 { get; set; }
         public IEnumerable<T1> Gen2 { get; set; }
 
         public Func<T, T1, bool> Predicate { get; set; }
+
         public IEnumerable<dynamic> GetValues()
         {
             return (from t1 in Gen1
-                       from t2 in Gen2
-                       select new { Item1=t1, Item2=t2 });
+                from t2 in Gen2
+                select new {Item1 = t1, Item2 = t2});
         }
 
-        public dynamic Prop { get { return Predicate; } }
+        public dynamic Prop
+        {
+            get { return Predicate; }
+        }
+
         public void SetPredicate(dynamic predicate)
         {
-            Predicate = predicate;
+            Predicate = (Func<T, T1, bool>)predicate;
         }
 
         public Quantifier Quntifier { get; set; }
     }
 
-    class PropArg<T> : IPropArg
+    internal class PropArg<T> : IPropArg
     {
         public IEnumerable<T> Gen1 { get; set; }
         public Func<T, bool> Predicate { get; set; }
@@ -100,18 +109,23 @@ namespace CSharpCheck
         public IEnumerable<dynamic> GetValues()
         {
             return (from t1 in Gen1
-                    select new { Item1 = t1});
+                select new {Item1 = t1});
         }
-        public dynamic Prop { get { return Predicate; } }
+
+        public dynamic Prop
+        {
+            get { return Predicate; }
+        }
+
         public void SetPredicate(dynamic predicate)
         {
-            Predicate = predicate;
+            Predicate = (Func<T, bool>)predicate;
         }
 
         public Quantifier Quntifier { get; set; }
     }
 
-    enum Quantifier
+    internal enum Quantifier
     {
         None,
         ForAll,

@@ -1,13 +1,18 @@
-﻿using System;
+﻿#region Copyright
+
+// CSharpCheck
+// Copyright (c) 2013, Maruf Rahman. All rights reserved.                	
+// 
+// Licensed under the Apache License, Version 2.0 (the "License"); 	
+// There is NO WARRANTY. See the file LICENSE for the full text.
+
+#endregion
+
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CSharpCheck.Generators
 {
-    class CharGenerator:Generator<char>
+    internal class CharGenerator : Generator<char>
     {
         public override IEnumerator<char> GetEnumerator()
         {
@@ -16,13 +21,13 @@ namespace CSharpCheck.Generators
                 switch (s)
                 {
                     case 'a':
-                        yield return (char)_rnd.Next((int) 'a', (int) 'z');
+                        yield return (char) _rnd.Next('a', 'z');
                         break;
                     case 'A':
-                        yield return (char)_rnd.Next((int)'A', (int)'Z');
+                        yield return (char) _rnd.Next('A', 'Z');
                         break;
                     case '0':
-                        yield return (char)_rnd.Next((int)'0', (int)'9');
+                        yield return (char) _rnd.Next('0', '9');
                         break;
                     default:
                         yield return (char) s;

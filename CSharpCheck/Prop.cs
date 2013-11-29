@@ -1,5 +1,16 @@
-﻿using System;
+﻿#region Copyright
+
+// CSharpCheck
+// Copyright (c) 2013, Maruf Rahman. All rights reserved.                	
+// 
+// Licensed under the Apache License, Version 2.0 (the "License"); 	
+// There is NO WARRANTY. See the file LICENSE for the full text.
+
+#endregion
+
+using System;
 using System.Collections.Generic;
+using CSharpCheck.Specification;
 
 namespace CSharpCheck
 {
@@ -7,18 +18,18 @@ namespace CSharpCheck
     {
         public static PropertyBuilder<T> ForAll<T>(IEnumerable<T> generator)
         {
-            return new PropertyBuilder<T>(new PropArg<T>(){Gen1 = generator, Quntifier = Quantifier.ForAll});
+            return new PropertyBuilder<T>(new PropArg<T> {Gen1 = generator, Quntifier = Quantifier.ForAll});
         }
 
         public static PropertyBuilder<T> ThereExists<T>(IEnumerable<T> generator)
         {
-            return new PropertyBuilder<T>(new PropArg<T>() { Gen1 = generator, Quntifier = Quantifier.ThereExists});
+            return new PropertyBuilder<T>(new PropArg<T> {Gen1 = generator, Quntifier = Quantifier.ThereExists});
         }
-        
 
-        public static PropertySpec ForAll<T>(Func<T, bool> predicate)
+
+        public static IPropertySpec ForAll<T>(Func<T, bool> predicate)
         {
-            return new PropertySpec(
+            return new Property(
                 new PropArg<T>
                 {
                     Gen1 = new Arbitrary<T>(),
@@ -27,9 +38,9 @@ namespace CSharpCheck
                 });
         }
 
-        public static PropertySpec ForAll<T1, T2>(Func<T1, T2, bool> predicate)
+        public static IPropertySpec ForAll<T1, T2>(Func<T1, T2, bool> predicate)
         {
-            return new PropertySpec(
+            return new Property(
                 new PropArg<T1, T2>
                 {
                     Gen1 = new Arbitrary<T1>(),
@@ -39,9 +50,9 @@ namespace CSharpCheck
                 });
         }
 
-        public static PropertySpec ThereExists<T>(Func<T, bool> predicate)
+        public static IPropertySpec ThereExists<T>(Func<T, bool> predicate)
         {
-            return new PropertySpec(
+            return new Property(
                 new PropArg<T>
                 {
                     Gen1 = new Arbitrary<T>(),
@@ -50,9 +61,9 @@ namespace CSharpCheck
                 });
         }
 
-        public static PropertySpec ThereExists<T1, T2>(Func<T1, T2, bool> predicate)
+        public static IPropertySpec ThereExists<T1, T2>(Func<T1, T2, bool> predicate)
         {
-            return new PropertySpec(
+            return new Property(
                 new PropArg<T1, T2>
                 {
                     Gen1 = new Arbitrary<T1>(),
@@ -61,9 +72,5 @@ namespace CSharpCheck
                     Quntifier = Quantifier.ThereExists
                 });
         }
-
     }
-   
-
-
 }

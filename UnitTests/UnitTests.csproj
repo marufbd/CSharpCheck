@@ -59,6 +59,8 @@
     <Compile Include="ListGeneratorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropTests.cs" />
+    <Compile Include="ReportingTests.cs" />
+    <Compile Include="TestModel\Person.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CSharpCheck\CSharpCheck.csproj">
