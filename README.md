@@ -72,3 +72,5 @@ Test method UnitTests.GeneratorTests.PersonModelGenerator threw exception:
 CSharpCheck.TestFailedException: ! Failed after 0 tests, for value: { Item1 = Name:Zian, Age:12 }
 
 ```
+
+* See the Unit Tests for Inspiration/Comments
