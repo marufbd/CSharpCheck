@@ -41,8 +41,8 @@ Now we can write a unit test like:
 
 ```
 var adults = from age in Gen.Choose(18, 35)
-                from name in Gen.OneOf("Khalid", "Jaman", "Sajib", "Roni")
-                select new Person(name, age);
+            from name in Gen.OneOf("Khalid", "Jaman", "Sajib", "Roni")
+            select new Person(name, age);
 var adultsCanEnterBars = Prop.ForAll(adults).SuchThat(aBar.CanEnter);
 adultsCanEnterBars.Check();
 ```
@@ -58,10 +58,10 @@ Now see how a test fails like:
 
 ```
 var randomPersons = from age in Gen.Choose(10, 35)
-                         from name in Gen.OneOf("Khalid", "Jaman", "Zian", "Ayan")
-                         select new Person(name, age);
-            var randomPersonsCanEnterBar = Prop.ForAll(randomPersons).SuchThat(aBar.CanEnter);
-            randomPersonsCanEnterBar.Check();
+                    from name in Gen.OneOf("Khalid", "Jaman", "Zian", "Ayan")
+                    select new Person(name, age);
+var randomPersonsCanEnterBar = Prop.ForAll(randomPersons).SuchThat(aBar.CanEnter);
+randomPersonsCanEnterBar.Check();
 
 ```
 
